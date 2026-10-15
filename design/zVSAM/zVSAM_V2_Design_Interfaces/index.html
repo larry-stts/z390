@@ -2035,6 +2035,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../contributing/contribute_cics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to zCICS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/cics_regression_testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics Sequential Terminal Regression Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="/z390/javadoc/index.html" class="md-nav__link">
         
   
@@ -4944,7 +5000,7 @@ Some keywords are valid only when the ACB is open. An error is returned when any
 <tr>
 <td>NEXT</td>
 <td>4</td>
-<td>Nr of extents to the physical file. Foxes.</td>
+<td>Nr of files allocated to the component.</td>
 </tr>
 <tr>
 <td>NINSR</td>
@@ -4969,7 +5025,7 @@ Some keywords are valid only when the ACB is open. An error is returned when any
 <tr>
 <td>NSSS</td>
 <td>4</td>
-<td>Nr of control area splits. Foxes.</td>
+<td>Nr of control area splits. Zero.</td>
 </tr>
 <tr>
 <td>NUIW</td>
@@ -5429,7 +5485,7 @@ TESTCB ACB= and/or MODCB ACB= to generate, inspect, test, and/or modify the ACB'
 <tr>
 <td></td>
 <td>NEXT=nr</td>
-<td>Nr of extents</td>
+<td>Nr of files</td>
 <td>EQ LO HI</td>
 </tr>
 <tr>
@@ -5459,7 +5515,7 @@ TESTCB ACB= and/or MODCB ACB= to generate, inspect, test, and/or modify the ACB'
 <tr>
 <td></td>
 <td>NSSS=nr</td>
-<td>Nr of control area splits. Compares to zero.</td>
+<td>Nr of control area splits. Contains zeros.</td>
 <td>EQ LO HI</td>
 </tr>
 <tr>
@@ -5772,7 +5828,7 @@ The syntax rules for ATRB have been tightened in zVSAM V2:
 <p>See <a href="#supported-parameter-types">supported parameter types</a> for details.</p>
 <blockquote>
 <p>[!NOTE]
-Melvyn defined RBA values. We use LRSNs throughout. If we do not drop the RBA support,
+Melvyn defined RBA values. We use XLRAs throughout. If we do not drop the RBA support,
 we'll need to find out why Melvyn introduced RBA values and how he plans to assign/maintain them.</p>
 <p>[!NOTE]
 Melvyn defined ERROR to return code from last open/close.
@@ -7270,7 +7326,7 @@ Use GENCB to generate RPLs in dynamically acquired storage.</p>
 <p>Pointer to search argument. This is a key, a relative record number, or a RBA.</p>
 <blockquote>
 <p>[!NOTE]
-Melvyn mentions RBA - I think this should be an XLRSN instead. Unless we decide to support RBAs as well.</p>
+Melvyn mentions RBA - I think this should be an XLRA instead. Unless we decide to support RBAs as well.</p>
 </blockquote>
 <h4 id="keylen">KEYLEN=</h4>
 <p>Length of key value specified in ARG= when a generic key search is requested.</p>
@@ -7479,7 +7535,7 @@ The bit <code>RPLOPT2_ECB</code> is set for an external ECB.</p>
 </table>
 <blockquote>
 <p>[!NOTE]
-RBA/XRBA - Melvyn assumed RBA support. Maybe we should use LRSN/XLRSN instead?</p>
+RBA/XRBA - Melvyn assumed RBA support. Maybe we should use XLRA instead?</p>
 </blockquote>
 <p>================================================================================================================================================================================</p>
 <h3 id="rpld-macro">RPLD macro</h3>
@@ -8383,7 +8439,7 @@ All subparameters have to be true for EQ.</p>
 <p>See <a href="#supported-parameter-types">supported parameter types</a> for details.</p>
 <blockquote>
 <p>[!NOTE]
-Melvyn defined RBA values. We use LRSNs throughout. If we do not drop the RBA support,
+Melvyn defined RBA values. We use XLRAs throughout. If we do not drop the RBA support,
 we'll need to find out why Melvyn introduced RBA values and how he plans to assign/maintain them.</p>
 </blockquote>
 <h4 id="mf_12">MF=</h4>

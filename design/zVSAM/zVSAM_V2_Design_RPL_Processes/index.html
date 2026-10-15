@@ -2035,6 +2035,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../contributing/contribute_cics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to zCICS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/cics_regression_testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics Sequential Terminal Regression Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="/z390/javadoc/index.html" class="md-nav__link">
         
   
@@ -2946,8 +3002,9 @@ component is lengthened.</p>
 <p>Prefix counter field <code>CTRNEXCP</code> needs to be incremented whenever a block needs to be written out. This
 occurs when the cluster was opened with <code>MACRF=NDF</code>. With <code>MACRF=DFR</code> no writes are forced and no
 EXCP needs to be counted.</p>
-<p>When a file can no longer be extended a secondary file needs to be allocated. When that is done transparently,
-<code>CTRNEXT</code> needs to be incremented. Setting its initial value is a function of zRepro.</p>
+<p>When a file can no longer be extended a secondary file needs to be allocated. That is done transparently,
+the new file is allocated, initialized, and chained to the previous-last file. Additional housekeeping is
+performed, including an increment of <code>CTRNEXT</code>. Setting the initial value of <code>CTRNEXT</code> is a function of zRepro.</p>
 <p>Prefix counter fields <code>CTRNINSR</code> and <code>CTRNLOGR</code> need to be incremented whenever a new record is added
 to the component.</p>
 <p>Prefix counter field <code>CTRNRETR</code> needs to be incremented for every block accessed, whether it needs to be

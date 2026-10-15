@@ -2035,6 +2035,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../contributing/contribute_cics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to zCICS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contributing/cics_regression_testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics Sequential Terminal Regression Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="/z390/javadoc/index.html" class="md-nav__link">
         
   
@@ -2845,8 +2901,16 @@ to the extent that the following acronyms and terms are understood:</p>
 <td>Control Block Modification Request</td>
 </tr>
 <tr>
+<td>CA</td>
+<td>Control Area</td>
+</tr>
+<tr>
 <td>CI</td>
 <td>Control Interval</td>
+</tr>
+<tr>
+<td>DRP</td>
+<td>z390 only: Displaced Record Pointer</td>
 </tr>
 <tr>
 <td>ESDS</td>
@@ -2910,7 +2974,7 @@ to the extent that the following acronyms and terms are understood:</p>
 </tr>
 <tr>
 <td>XLRA</td>
-<td>Extended Logical Record Address</td>
+<td>Extended Logical Record Address - z390 equivalent of RBA/XRBA</td>
 </tr>
 <tr>
 <td>zACB</td>
@@ -2937,6 +3001,10 @@ The ones that are used by IBM as well, are intended to have the same meaning the
 </thead>
 <tbody>
 <tr>
+<td>allow mode</td>
+<td>enabled by <code>allow</code> option on z390 invocation. <code>noallow</code> or compatibility mode is the default</td>
+</tr>
+<tr>
 <td>Area</td>
 <td>a section of storage with a defined layout, depending on the type of Area</td>
 </tr>
@@ -2946,19 +3014,19 @@ The ones that are used by IBM as well, are intended to have the same meaning the
 </tr>
 <tr>
 <td>Cluster</td>
-<td>a set of files that logically belong together</td>
+<td>a component (ESDS, RRDS, LDS) or a set of components (KSDS, AIX) that logically belong together</td>
 </tr>
 <tr>
 <td>Component</td>
-<td>either a data component or an index component of a cluster</td>
+<td>either a data component or an index component of a cluster, consists of 1 or more Files</td>
 </tr>
 <tr>
 <td>Element</td>
-<td>a primary key or XRBA in an AIX record</td>
+<td>a primary key (KSDS), RRN (RRDS), or XLRA (any cluster type) uniquely identifying a record</td>
 </tr>
 <tr>
 <td>File</td>
-<td>a single file as seen by the hosting operating system</td>
+<td>a single file as seen by the hosting operating system, the closest thing in z390 to a Control Area</td>
 </tr>
 <tr>
 <td>Foxes</td>
@@ -2991,7 +3059,7 @@ The ones that are used by IBM as well, are intended to have the same meaning the
 </tbody>
 </table>
 <h2 id="compatibility">Compatibility</h2>
-<p>As this document relates to zVSAM V2, there are two type of compatibility we need to consider.
+<p>As this document relates to zVSAM V2, there are two types of compatibility we need to consider.
 On the one hand we have designed zVSAM to be compatible with IBM VSAM.
 And on the other hand we need to consider compatibility with
 z390's zVSAM V1 – the prior implementation of zVSAM in the z390 environment.</p>
@@ -3022,7 +3090,7 @@ inconvenience this may cause.</p>
 <ol>
 <li>We have introduced a new z390 option: ZVSAM which indicates which version of
    zVSAM you want z390 to use.
-   For maximum compatibility the default is set to ZVSAM(1) to enable zVSAM v1.
+   For maximum compatibility the default is set to ZVSAM(1) to enable zVSAM V1.
    The default will be changed to ZVSAM(2) in a future release of z390.
    The parameter takes the following forms:<ol>
 <li>ZVSAM(0) – zVSAM usage is disallowed</li>
@@ -3031,8 +3099,8 @@ inconvenience this may cause.</p>
 </ol>
 </li>
 <li>Any assembly involving zVSAM must use either zVSAM V1 or zVSAM V2,
-   the cannot be mixed. However, modules using zVSAM V1 and zVSAM V2 can be linked
-   and executed in the z390. This should allow for a gradual transition from zVSAM V1 to V2.</li>
+   they cannot be mixed. However, modules using zVSAM V1 and zVSAM V2 can be linked
+   and executed in the z390 environment. This should allow for a gradual transition from zVSAM V1 to V2.</li>
 <li>To convert your zVSAM V1 clusters to zVSAM V2 you'll have to take the following steps:<ol>
 <li>unload the existing data from their clusters using REPRO. \
    For details on how to use REPRO, please refer to the "z390_VSAM_User_Guide"</li>
@@ -3041,7 +3109,7 @@ inconvenience this may cause.</p>
 </ol>
 </li>
 <li>All macros supporting zVSAM will be modified to make them version-aware.
-   The ZVSAM option value described above will be propagated into a sytem SETC variable &amp;SYSZVSAM.
+   The ZVSAM option value described above will be propagated into a system SETC variable &amp;SYSZVSAM.
    This variable can be tested to choose the correct expansion of these macros.
    Your own code can also test this system variable.</li>
 </ol>

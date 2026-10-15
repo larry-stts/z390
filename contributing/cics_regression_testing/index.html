@@ -1,0 +1,4394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="z390 Development team">
+      
+      
+        <link rel="canonical" href="https://z390development.github.io/z390/contributing/cics_regression_testing/">
+      
+      
+        <link rel="prev" href="../contribute_cics/">
+      
+      
+        <link rel="next" href="../../design/zCOBOL/replace_implementation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>zCics Sequential Terminal Regression Testing - z390</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#zcics-sequential-terminal-regression-testing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <p>This is a work in progress. Contributions to the documentation are welcome. See <a
+    href="../contribute_docs">Contributing</a> for more information.</p>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="z390" class="md-header__button md-logo" aria-label="z390" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            z390
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              zCics Sequential Terminal Regression Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/z390development/z390" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    z390development/z390
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting_started/install/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user_guide/z390/commands/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/svc_services/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../contribute_docs/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../design/zCOBOL/replace_implementation/" class="md-tabs__link">
+          
+  
+  
+  Design documents
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="z390" class="md-nav__button md-logo" aria-label="z390" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    z390
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/z390development/z390" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    z390development/z390
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick starts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Learning resources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting_started/macro_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mainframe OS compatible macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z390
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Z390
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/z390/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/z390/structured_macro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Structured Macro Extensions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/z390/z390_filetypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    z390 File types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/z390/z390_messages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java message inventory (z390 runtime)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/z390/z390_options/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    z390 Options
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    zCOBOL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/zCOBOL_User_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/zCOBOL_System_Programmer_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL System Programmer's Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/zCOBOL_filetypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL file types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/zCOBOL_options/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL options
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCOBOL/zCOBOL_NIST_COBOL_1985_Test_Results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL NIST COBOL 1985 Test Results
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    zCICS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manuals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_app_prog_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS Application Programming Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_basic_mapping_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS Basic Mapping Support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_diagnosis_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS Diagnosis Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics History
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics - introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_supplied_transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS Supplied Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_sys_prog_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS System Programmer's Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zCICS/zcics_vsam_guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCICS VSAM Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    zVSAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zVSAM/zVSAM_V1_User_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM v1 User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zVSAM/zVSAM_V1_Catalog_User_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM v1 Catalog User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_guide/zVSAM/zVSAM_V1_zRepro_User_Guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM v1 zRepro User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/svc_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SVC services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/program_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Program Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/storage_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Storage services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/file_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Non-VSAM File Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/guam_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUAM services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/soa_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SOA services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/structured_program/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Structured programming macros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/vsam_file_services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/zpar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zPAR and zPARTRS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/sort/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zSORT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/assist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ASSIST support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute_docs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to z390 Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute_code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to z390
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing_zcobol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to zCOBOL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute_cics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing to zCICS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics Sequential Terminal Regression Testing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCics Sequential Terminal Regression Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-regression-run-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Regression Run Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How the Regression Run Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-a-seqi-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read a SEQI Record
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transaction-reconstruction-by-seqi-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transaction Reconstruction by SEQI File
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transaction Reconstruction by SEQI File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seqi0001-invalid-transaction-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0001 — Invalid transaction (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0002-mmm1-apct-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0002 — MMM1 APCT (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0003-mmm2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0003 — MMM2 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0004-gui4-map-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0004 — GUI4 map test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0005-gui6-map-test-full-keyboard-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0005 — GUI6 map test (full keyboard exercise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0006-tst1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0006 — TST1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0007-bed1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0007 — BED1 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0008-bed2-2-pf-key-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0008 — BED2 (×2, PF-key sweep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0009-bed3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0009 — BED3 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0010-bed4-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0010 — BED4 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0011-bed5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0011 — BED5 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0012-bed9-extensive-cebr-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0012 — BED9 + extensive CEBR exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0013-ic01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0013 — IC01
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0014-vsm1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0014 — VSM1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0015-vsm2-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0015 — VSM2 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0016-vsm3-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0016 — VSM3 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0017-bms1-mapping-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0017 — BMS1 (mapping support)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0018-bec1-zcobol-clone-of-bed1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0018 — BEC1 (zCobol clone of BED1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0019-bec2-zcobol-clone-of-bed2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0019 — BEC2 (zCobol clone of BED2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0020-bec3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0020 — BEC3 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0021-bec4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0021 — BEC4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0022-bec5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0022 — BEC5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0023-bec9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0023 — BEC9
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0024-icc1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0024 — ICC1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0025-vsc1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0025 — VSC1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0026-vsc2-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0026 — VSC2 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0027-vsc3-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0027 — VSC3 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0028-bmc1-zcobol-clone-of-bms1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0028 — BMC1 (zCobol clone of BMS1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0029-logo-asgn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0029 — LOGO + ASGN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0030-setf-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0030 — SETF (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0031-chn1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0031 — CHN1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0032-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0032 — Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seqc-comparator-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQC Comparator Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-decoding-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Decoding Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/z390/javadoc/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    z390 JavaDocs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design documents
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Design documents
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    zCOBOL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zCOBOL/replace_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL REPLACE Statement Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zCOBOL/sort_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL SORT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zCOBOL/string_implementation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zCOBOL STRING Statement Implementation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    zVSAM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 Design and Logic manual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_Catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 Catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_Interfaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 - API for Assembler and zCobol programs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_File_Structure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 - Physical structure of the files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_ACB_Processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 - Logical processes for ACB-based requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_RPL_Processes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 - Logical processes for RPL-based requests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/zVSAM/zVSAM_V2_Design_Addenda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    zVSAM V2 - Addenda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-the-regression-run-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Regression Run Works
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How the Regression Run Works">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key files
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-a-seqi-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read a SEQI Record
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transaction-reconstruction-by-seqi-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transaction Reconstruction by SEQI File
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Transaction Reconstruction by SEQI File">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seqi0001-invalid-transaction-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0001 — Invalid transaction (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0002-mmm1-apct-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0002 — MMM1 APCT (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0003-mmm2-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0003 — MMM2 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0004-gui4-map-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0004 — GUI4 map test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0005-gui6-map-test-full-keyboard-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0005 — GUI6 map test (full keyboard exercise)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0006-tst1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0006 — TST1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0007-bed1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0007 — BED1 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0008-bed2-2-pf-key-sweep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0008 — BED2 (×2, PF-key sweep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0009-bed3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0009 — BED3 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0010-bed4-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0010 — BED4 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0011-bed5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0011 — BED5 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0012-bed9-extensive-cebr-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0012 — BED9 + extensive CEBR exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0013-ic01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0013 — IC01
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0014-vsm1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0014 — VSM1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0015-vsm2-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0015 — VSM2 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0016-vsm3-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0016 — VSM3 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0017-bms1-mapping-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0017 — BMS1 (mapping support)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0018-bec1-zcobol-clone-of-bed1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0018 — BEC1 (zCobol clone of BED1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0019-bec2-zcobol-clone-of-bed2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0019 — BEC2 (zCobol clone of BED2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0020-bec3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0020 — BEC3 (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0021-bec4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0021 — BEC4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0022-bec5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0022 — BEC5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0023-bec9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0023 — BEC9
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0024-icc1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0024 — ICC1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0025-vsc1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0025 — VSC1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0026-vsc2-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0026 — VSC2 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0027-vsc3-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0027 — VSC3 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0028-bmc1-zcobol-clone-of-bms1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0028 — BMC1 (zCobol clone of BMS1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0029-logo-asgn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0029 — LOGO + ASGN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0030-setf-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0030 — SETF (×2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0031-chn1-cebr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0031 — CHN1 + CEBR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seqi0032-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQI0032 — Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seqc-comparator-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SEQC Comparator Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-decoding-tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Decoding Tips
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="zcics-sequential-terminal-regression-testing">zCics Sequential Terminal Regression Testing</h1>
+<p><strong>Note:</strong> This document was generated by Cursor AI.</p>
+<h2 id="how-the-regression-run-works">How the Regression Run Works</h2>
+<p>When you run <code>cics\bat\Z390RT.BAT</code>:</p>
+<ol>
+<li>It copies <code>Z390RT.INI</code> &rarr; <code>Z390CICS.INI</code> with <code>SEQ_TERM=YES</code>.</li>
+<li>That disables normal local terminals and starts one <strong>sequential terminal</strong> <code>SQ01</code> with <strong>no initial transid</strong>.</li>
+<li><code>Z390KCP</code> opens <code>cics\seq\SEQI0001.TXT</code> for input and <code>cics\seq\SEQO0001.TXT</code> for output.</li>
+<li>Each <strong>TGET</strong> from application code reads the next CRLF-terminated record from the current <code>SEQI</code> file.</li>
+<li>Each <strong>TPUT</strong> writes a CRLF-terminated record to <code>SEQO0001.TXT</code>.</li>
+<li>On end-of-file, <code>LCL0402</code> closes the file, increments the number (<code>0001</code> &rarr; <code>0002</code> &rarr; ...), and opens the next <code>SEQI</code> file.</li>
+<li>When input is exhausted, the terminal requests shutdown.</li>
+</ol>
+<h3 id="key-files">Key files</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cics\seq\SEQDOC.TXT</code></td>
+<td>Authoritative human summary of each stream</td>
+</tr>
+<tr>
+<td><code>cics\seq\SEQInnnn.TXT</code></td>
+<td>Input byte streams (TGET replay)</td>
+</tr>
+<tr>
+<td><code>cics\seq\SEQCnnnn.TXT</code></td>
+<td>Golden output streams for comparison</td>
+</tr>
+<tr>
+<td><code>cics\seq\SEQO0001.TXT</code></td>
+<td>Output from a regression run</td>
+</tr>
+<tr>
+<td><code>cics\bat\Z390CMPG.BAT</code></td>
+<td>Compares <code>SEQC</code> files against <code>SEQO0001.TXT</code></td>
+</tr>
+<tr>
+<td><code>cics\bat\Z390TRC.BAT</code></td>
+<td>Capture mode (<code>SEQ_TERM=TRACE</code>)</td>
+</tr>
+<tr>
+<td><code>cics\bat\Z390SEQG.BAT</code></td>
+<td>Extracts <code>.TRE</code> trace &rarr; <code>SEQI</code>/<code>SEQC</code> files</td>
+</tr>
+<tr>
+<td><code>cics\seq\SEQISHUT.TXT</code></td>
+<td>Sample shutdown stream (<code>CEMT P SHUT</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-read-a-seqi-record">How to Read a SEQI Record</h2>
+<p>Each record is one simulated 3270 keystroke/data submission:</p>
+<table>
+<thead>
+<tr>
+<th>Byte(s)</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>AID</strong> — <code>7D</code>=ENTER, <code>6D</code>=CLEAR, <code>F1</code>-<code>F9</code>=PF1-PF9, <code>7A</code>-<code>7C</code>=PF10-PF12, <code>C1</code>-<code>C6</code>=PF13-PF18</td>
+</tr>
+<tr>
+<td>2-3</td>
+<td><strong>Cursor position</strong> (3270 address, EBCDIC-encoded)</td>
+</tr>
+<tr>
+<td>4+</td>
+<td><strong>Field data</strong> (EBCDIC text, map fields, CEBR commands, etc.)</td>
+</tr>
+</tbody>
+</table>
+<p>Records are separated by <code>0D 0A</code> (CRLF). Decode field data as <strong>EBCDIC cp037</strong>.</p>
+<p>Starting a transaction from a blank screen:
+<div class="highlight"><pre><span></span><code>ENTER + cursor + 4-char TRANSID
+</code></pre></div></p>
+<p>Example from <code>SEQI0001.TXT</code>: <code>7D 40 C4 C1 C1 C1 C1</code> &rarr; ENTER, then transid <strong>AAAA</strong>.</p>
+<p><code>CLEAR</code> (<code>6D</code>) ends a transaction and returns to an empty screen.</p>
+<p>For CEBR:
+<div class="highlight"><pre><span></span><code>ENTER + cursor + "CEBR" + optional argument(s)
+</code></pre></div></p>
+<p>e.g. <code>Icebr MYQUEUE1</code>, <code>Icebr x'01cb458f'</code>.</p>
+<p>AID reference: <code>AIDINDEX</code> table in <code>cics\LCL0402.MLC</code>.</p>
+<hr />
+<h2 id="transaction-reconstruction-by-seqi-file">Transaction Reconstruction by SEQI File</h2>
+<p>Below, <strong>steps</strong> are the user-visible actions encoded in each file. <strong>Program</strong> is from <code>DFHPCT.MLC</code>.</p>
+<h3 id="seqi0001-invalid-transaction-2">SEQI0001 — Invalid transaction (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>AAAA</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER <strong>AAAA</strong> again</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: none (invalid transid &rarr; APCT/NOTFND handling).</p>
+<hr />
+<h3 id="seqi0002-mmm1-apct-2">SEQI0002 — MMM1 APCT (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>MMM1</strong> (program <code>BADPROG</code> &rarr; APCT)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER <strong>MMM1</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="seqi0003-mmm2-2">SEQI0003 — MMM2 (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>MMM2</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER <strong>MMM2</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>MMMMCIC2</code>.</p>
+<hr />
+<h3 id="seqi0004-gui4-map-test">SEQI0004 — GUI4 map test</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>GUI4</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>ENTER field data <strong>abc</strong> (map field 1)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER field data <strong>def</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>ENTER <strong>END</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTGUI4</code>.</p>
+<hr />
+<h3 id="seqi0005-gui6-map-test-full-keyboard-exercise">SEQI0005 — GUI6 map test (full keyboard exercise)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>GUI6</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Field 1: <code>aaa</code> (underscore-padded)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Field 2: <code>bbb</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Field 3: <code>123</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>PF1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PF3 &rarr; switches to reverse field order</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Field 3: <code>987</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Field 2: <code>qqq</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Field 1: <code>xxx</code></td>
+</tr>
+<tr>
+<td>10</td>
+<td>PF3 &rarr; end</td>
+</tr>
+<tr>
+<td>11</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTGUI6</code>.</p>
+<hr />
+<h3 id="seqi0006-tst1">SEQI0006 — TST1</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>TST1</strong></td>
+</tr>
+<tr>
+<td>2-4</td>
+<td>Three ENTER presses (in-transaction prompts)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>PF3</td>
+</tr>
+<tr>
+<td>6</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTCIC1</code>.</p>
+<hr />
+<h3 id="seqi0007-bed1-2">SEQI0007 — BED1 (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run 1</td>
+<td>ENTER <strong>BED1</strong>, then 8× ENTER (exercise temp storage screens), CLEAR</td>
+</tr>
+<tr>
+<td>Run 2</td>
+<td>Same again</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBED1</code> — tests EXEC CICS WRITEQ TS and related temp-storage APIs.</p>
+<hr />
+<h3 id="seqi0008-bed2-2-pf-key-sweep">SEQI0008 — BED2 (×2, PF-key sweep)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run 1</td>
+<td>ENTER <strong>BED2</strong>, then PF12 down through PF1, then PF13-PF18, CLEAR</td>
+</tr>
+<tr>
+<td>Run 2</td>
+<td>ENTER <strong>BED2</strong>, then PF22-PF18 descending (PF24..PF18 via <code>4C 4B 4A C9..C7</code>), CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBED4</code>.</p>
+<hr />
+<h3 id="seqi0009-bed3-2">SEQI0009 — BED3 (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run 1</td>
+<td>ENTER <strong>BED3</strong>, PF4, PF5, PF6, CLEAR</td>
+</tr>
+<tr>
+<td>Run 2</td>
+<td>ENTER <strong>BED3</strong>, PF6, PF5, PF4, PF6, PF5, PF7, PF6, CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBED5</code>.</p>
+<hr />
+<h3 id="seqi0010-bed4-2">SEQI0010 — BED4 (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Each run</td>
+<td>ENTER <strong>BED4</strong>, 3× ENTER, CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBED6</code>.</p>
+<hr />
+<h3 id="seqi0011-bed5-2">SEQI0011 — BED5 (×2)</h3>
+<p>Same pattern as 0010 but transid <strong>BED5</strong>.</p>
+<p>Program: <code>TESTBED6</code>.</p>
+<hr />
+<h3 id="seqi0012-bed9-extensive-cebr-exercise">SEQI0012 — BED9 + extensive CEBR exercise</h3>
+<p>Largest stream (58 input records).</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BED9 setup</td>
+<td>ENTER <strong>BED9</strong>, CLEAR</td>
+</tr>
+<tr>
+<td>CEBR entry variants</td>
+<td><strong>CEBR</strong> (blank), CLEAR</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>CEBR FRED</strong>, CLEAR</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>CEBR MYQUEUE1</strong>, CLEAR</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>CEBR x'01cb458f'</strong>, CLEAR</td>
+</tr>
+<tr>
+<td>Cursor select</td>
+<td>ENTER <strong>CEBR</strong>, cursor-select <strong>MYQUEUE1</strong></td>
+</tr>
+<tr>
+<td>Navigation</td>
+<td>PF11, PF5, PF4, PF8, PF4, PF1, ENTER, PF2×3, PF3</td>
+</tr>
+<tr>
+<td>Queue list</td>
+<td>PF2×3, cursor-select <strong>MYQUEUE2</strong></td>
+</tr>
+<tr>
+<td>Scrolling/commands</td>
+<td>PF9×3, <code>c 5</code>, <code>l 30</code>, PF7, PF8×2, PF12, PF9, PF10</td>
+</tr>
+<tr>
+<td>More commands</td>
+<td>PF4, PF5, <code>t</code>, <code>b</code></td>
+</tr>
+<tr>
+<td>Queue lookup</td>
+<td><code>q MYQUEUE1</code>, <code>q x'01cb458f'</code></td>
+</tr>
+<tr>
+<td>Wrap-up</td>
+<td>PF2×3, PF11, PF2×3, PF11, <code>c 36</code>, PF7, PF12, PF2, <strong>PURGE</strong>, CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Programs: <code>TESTBED9</code> (creates TS queues), then <code>Z390CEBR</code>.</p>
+<p><strong>Note:</strong> <code>contribute_cics.md</code> documents a current failure (AEIV/U0444) triggered from this stream (GitHub issue 784).</p>
+<hr />
+<h3 id="seqi0013-ic01">SEQI0013 — IC01</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>IC01</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTIC01</code> (interval control).</p>
+<hr />
+<h3 id="seqi0014-vsm1-cebr">SEQI0014 — VSM1 + CEBR</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>VSM1</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER <strong>CEBR VSM1</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>PF5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTVSM1</code>, then CEBR on VSAM file.</p>
+<hr />
+<h3 id="seqi0015-vsm2-cebr">SEQI0015 — VSM2 + CEBR</h3>
+<p>Same as 0014 with <strong>VSM2</strong> / <code>CEBR VSM2</code>.</p>
+<hr />
+<h3 id="seqi0016-vsm3-cebr">SEQI0016 — VSM3 + CEBR</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>VSM3</strong>, CLEAR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ENTER <strong>CEBR VSM3</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>PF11×2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PF5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="seqi0017-bms1-mapping-support">SEQI0017 — BMS1 (mapping support)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>BMS1</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>GUI4 phase: fields <strong>ABC</strong>, <strong>DEF</strong>, <strong>END</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>GUI6 phase: long map input including <code>test with underscores</code>, <code>test erase eof</code>, numeric/date fields, PF keys</td>
+</tr>
+<tr>
+<td>4</td>
+<td>PF1, PF4 (twice), ENTER, PF3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBMS1</code> (BMS SEND/RECEIVE MAP — mirrors GUI4/GUI6 flow).</p>
+<hr />
+<h3 id="seqi0018-bec1-zcobol-clone-of-bed1">SEQI0018 — BEC1 (zCobol clone of BED1)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>BEC1</strong></td>
+</tr>
+<tr>
+<td>2-9</td>
+<td>8× ENTER (same screen flow as BED1)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBEC1</code>.</p>
+<hr />
+<h3 id="seqi0019-bec2-zcobol-clone-of-bed2">SEQI0019 — BEC2 (zCobol clone of BED2)</h3>
+<p>PF12&rarr;PF1, PF13&rarr;PF18 sweep after <strong>BEC2</strong>, then CLEAR.</p>
+<p>Program: <code>TESTBEC4</code>.</p>
+<hr />
+<h3 id="seqi0020-bec3-2">SEQI0020 — BEC3 (×2)</h3>
+<p>Same PF-key patterns as BED3 but transid <strong>BEC3</strong>.</p>
+<p>Program: <code>TESTBEC5</code>.</p>
+<hr />
+<h3 id="seqi0021-bec4">SEQI0021 — BEC4</h3>
+<p>Same as BED4 pattern: <strong>BEC4</strong>, 3× ENTER, CLEAR.</p>
+<p>Program: <code>TESTBEC6</code>.</p>
+<hr />
+<h3 id="seqi0022-bec5">SEQI0022 — BEC5</h3>
+<p>Same as BED5 pattern.</p>
+<p>Program: <code>TESTBEC6</code>.</p>
+<hr />
+<h3 id="seqi0023-bec9">SEQI0023 — BEC9</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>BEC9</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTBEC9</code>.</p>
+<hr />
+<h3 id="seqi0024-icc1">SEQI0024 — ICC1</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>ICC1</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTICC1</code> (zCobol IC01).</p>
+<hr />
+<h3 id="seqi0025-vsc1-cebr">SEQI0025 — VSC1 + CEBR</h3>
+<p>Same pattern as 0014: <strong>VSC1</strong>, CLEAR, <strong>CEBR VSC1</strong>, PF5, CLEAR.</p>
+<p>Program: <code>TESTVSC1</code>.</p>
+<hr />
+<h3 id="seqi0026-vsc2-cebr">SEQI0026 — VSC2 + CEBR</h3>
+<p>Same with <strong>VSC2</strong>.</p>
+<hr />
+<h3 id="seqi0027-vsc3-cebr">SEQI0027 — VSC3 + CEBR</h3>
+<p>Same as 0016: <strong>VSC3</strong>, CEBR, PF11×2, PF5, CLEAR.</p>
+<hr />
+<h3 id="seqi0028-bmc1-zcobol-clone-of-bms1">SEQI0028 — BMC1 (zCobol clone of BMS1)</h3>
+<p>Identical step sequence to SEQI0017 but transid <strong>BMC1</strong>.</p>
+<p>Program: <code>TESTBMC1</code>.</p>
+<hr />
+<h3 id="seqi0029-logo-asgn">SEQI0029 — LOGO + ASGN</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>LOGO</strong> (map consistency check)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>CLEAR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ENTER <strong>ASGN</strong> (ASSIGN testing)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Programs: <code>Z390LOGO</code>, <code>TESTASGN</code>.</p>
+<hr />
+<h3 id="seqi0030-setf-2">SEQI0030 — SETF (×2)</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>SETF</strong>, CLEAR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ENTER <strong>SETF</strong>, CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTSETF</code>.</p>
+<hr />
+<h3 id="seqi0031-chn1-cebr">SEQI0031 — CHN1 + CEBR</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong>CHN1</strong>, CLEAR</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ENTER <strong>CEBR CHN1</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>PF11 × 6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLEAR</td>
+</tr>
+</tbody>
+</table>
+<p>Program: <code>TESTCHN1</code>, then CEBR.</p>
+<hr />
+<h3 id="seqi0032-shutdown">SEQI0032 — Shutdown</h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ENTER <strong><code>.CEMT P SHUT</code></strong> (master-terminal CEMT shutdown command)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>EOF marker (<code>0x1A</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Same content as <code>SEQISHUT.TXT</code>. Used to terminate the regression run cleanly.</p>
+<hr />
+<h2 id="seqc-comparator-coverage">SEQC Comparator Coverage</h2>
+<p>Only these streams currently have golden <code>SEQC</code> files for <code>Z390CMPG</code> in <code>wrk_rt</code>:</p>
+<p><code>0001–0011</code>, <code>0017–0024</code>, <code>0028</code></p>
+<p>Streams <strong>0012–0016</strong>, <strong>0025–0027</strong>, <strong>0029–0031</strong> have input (<code>SEQI</code>) but no <code>SEQC</code> golden output.</p>
+<hr />
+<h2 id="practical-decoding-tips">Practical Decoding Tips</h2>
+<ol>
+<li>Records are separated by <code>0D 0A</code> (CRLF).</li>
+<li>Decode bytes as <strong>EBCDIC cp037</strong> (not ASCII).</li>
+<li>Byte 1 is the AID; see <code>AIDINDEX</code> in <code>cics\LCL0402.MLC</code>.</li>
+<li>Cross-check against <code>SEQDOC.TXT</code> and the matching test program (<code>TESTBED*</code>, <code>TESTBMS1</code>, etc.).</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 z390 Assembler LLC. All rights reserved
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="/z390/javadoc/index.html" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
